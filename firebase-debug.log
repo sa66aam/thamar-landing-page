@@ -79,3 +79,27 @@
 [debug] [2026-01-12T11:14:47.575Z] Checked if tokens are valid: true, expires at: 1768219350708
 [debug] [2026-01-12T11:14:47.575Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 updateMask=status%2Cconfig
 [debug] [2026-01-12T11:14:47.575Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 {"status":"FINALIZED","config":{}}
+[debug] [2026-01-12T11:14:49.415Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 200
+[debug] [2026-01-12T11:14:49.415Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 {"name":"projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-12T11:14:39.939649Z","createUser":{"email":"sa66aam@gmail.com"},"finalizeTime":"2026-01-12T11:14:49.267536Z","finalizeUser":{"email":"sa66aam@gmail.com"}}
+[debug] [2026-01-12T11:14:49.415Z] [hosting] finalized version for thamar-landing-page:[object Object]
+[info] ✔  hosting[thamar-landing-page]: version finalized 
+[info] i  hosting[thamar-landing-page]: releasing new version... 
+[debug] [2026-01-12T11:14:49.415Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:49.415Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:49.415Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/channels/live/releases versionName=projects%2F918570649704%2Fsites%2Fthamar-landing-page%2Fversions%2F924564d7758182c5
+[debug] [2026-01-12T11:14:49.415Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/channels/live/releases {}
+[debug] [2026-01-12T11:14:49.793Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/channels/live/releases 200
+[debug] [2026-01-12T11:14:49.794Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/channels/live/releases {"name":"projects/918570649704/sites/thamar-landing-page/channels/live/releases/1768216489195000","version":{"name":"projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-12T11:14:39.939649Z","createUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"},"finalizeTime":"2026-01-12T11:14:49.267536Z","finalizeUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"}},"type":"DEPLOY","releaseTime":"2026-01-12T11:14:49.195Z","releaseUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"}}
+[debug] [2026-01-12T11:14:49.794Z] [hosting] release: {"name":"projects/918570649704/sites/thamar-landing-page/channels/live/releases/1768216489195000","version":{"name":"projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5","status":"FINALIZED","config":{},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2026-01-12T11:14:39.939649Z","createUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"},"finalizeTime":"2026-01-12T11:14:49.267536Z","finalizeUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"}},"type":"DEPLOY","releaseTime":"2026-01-12T11:14:49.195Z","releaseUser":{"email":"sa66aam@gmail.com","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ_W4IqF8xUIaBUiyjZTp6gvNPBEMWRUc5v6yYizGRmxVRY-7-Y"}}
+[info] ✔  hosting[thamar-landing-page]: release complete 
+[info] 
+[info] ✔  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/thamar-landing-page/overview
+[info] Hosting URL: https://thamar-landing-page.web.app
+[debug] [2026-01-12T11:14:54.979Z] Error: Timed out.
+    at Timeout._onTimeout (/usr/local/lib/node_modules/firebase-tools/lib/utils.js:275:49)
+    at listOnTimeout (node:internal/timers:588:17)
+    at process.processTimers (node:internal/timers:523:7)
+[error] 
+[error] Error: An unexpected error has occurred.
