@@ -1,0 +1,81 @@
+[debug] [2026-01-12T11:14:34.803Z] ----------------------------------------------------------------------
+[debug] [2026-01-12T11:14:34.808Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only hosting
+[debug] [2026-01-12T11:14:34.808Z] CLI Version:   14.26.0
+[debug] [2026-01-12T11:14:34.808Z] Platform:      darwin
+[debug] [2026-01-12T11:14:34.809Z] Node Version:  v22.20.0
+[debug] [2026-01-12T11:14:34.809Z] Time:          Mon Jan 12 2026 14:14:34 GMT+0300 (Arabian Standard Time)
+[debug] [2026-01-12T11:14:34.809Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-01-12T11:14:34.893Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-12T11:14:34.893Z] > authorizing via signed-in user (sa66aam@gmail.com)
+[debug] [2026-01-12T11:14:34.893Z] [iam] checking project thamar-landing-page for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2026-01-12T11:14:34.893Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:34.893Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:34.894Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/thamar-landing-page:testIamPermissions [none]
+[debug] [2026-01-12T11:14:34.894Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/thamar-landing-page:testIamPermissions x-goog-quota-user=projects/thamar-landing-page
+[debug] [2026-01-12T11:14:34.894Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/thamar-landing-page:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-12T11:14:37.751Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/thamar-landing-page:testIamPermissions 200
+[debug] [2026-01-12T11:14:37.751Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/thamar-landing-page:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2026-01-12T11:14:37.752Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:37.752Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:37.752Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/thamar-landing-page [none]
+[debug] [2026-01-12T11:14:38.368Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/thamar-landing-page 200
+[debug] [2026-01-12T11:14:38.369Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/thamar-landing-page {"projectId":"thamar-landing-page","projectNumber":"918570649704","displayName":"Thamar Landing Page","name":"projects/thamar-landing-page","resources":{"hostingSite":"thamar-landing-page"},"state":"ACTIVE","etag":"1_f2e60077-126f-4463-ab75-d5d262ae5160"}
+[info] 
+[info] === Deploying to 'thamar-landing-page'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2026-01-12T11:14:38.376Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:38.376Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:38.376Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions [none]
+[debug] [2026-01-12T11:14:38.376Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2026-01-12T11:14:40.619Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions 200
+[debug] [2026-01-12T11:14:40.620Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions {"name":"projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[thamar-landing-page]: beginning deploy... 
+[info] i  hosting[thamar-landing-page]: found 2 files in public 
+[debug] [2026-01-12T11:14:40.638Z] [hosting] uploading with 200 concurrency
+[debug] [2026-01-12T11:14:40.638Z] [hosting] hash cache [cHVibGlj] not populated
+[debug] [2026-01-12T11:14:40.802Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:40.802Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:40.802Z] [hosting] hash cache [cHVibGlj] stored for 2 files
+[debug] [2026-01-12T11:14:40.802Z] [hosting][hash queue][FINAL] {"max":162,"min":4,"avg":83,"active":0,"complete":2,"success":2,"errored":0,"retried":0,"total":2,"elapsed":162}
+[debug] [2026-01-12T11:14:40.803Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5:populateFiles [none]
+[debug] [2026-01-12T11:14:40.803Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5:populateFiles {"files":{"/index.html":"bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f","/logo.jpg":"0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94"}}
+[debug] [2026-01-12T11:14:41.114Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5:populateFiles 200
+[debug] [2026-01-12T11:14:41.115Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5:populateFiles {"uploadRequiredHashes":["0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94","bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files"}
+[debug] [2026-01-12T11:14:41.116Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:41.116Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:41.116Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:41.116Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:41.117Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94 [none]
+[debug] [2026-01-12T11:14:41.117Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94 [stream]
+[debug] [2026-01-12T11:14:41.119Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f [none]
+[debug] [2026-01-12T11:14:41.119Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f [stream]
+[debug] [2026-01-12T11:14:41.120Z] [hosting][populate queue][FINAL] {"max":314,"min":314,"avg":314,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":318}
+[debug] [2026-01-12T11:14:41.120Z] [hosting] uploads queued: 2
+[debug] [2026-01-12T11:14:44.605Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f 200
+[debug] [2026-01-12T11:14:44.605Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/bdb7763c417b3ec0035bc31e1998ea56777280f178a94dcdd262f0f1939f532f [stream]
+[debug] [2026-01-12T11:14:47.573Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94 200
+[debug] [2026-01-12T11:14:47.573Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/thamar-landing-page/versions/924564d7758182c5/files/0674b1885e28a108d4d41ee1036306e5a97be984630f8f9fe7d9cd076ec71f94 [stream]
+[debug] [2026-01-12T11:14:47.573Z] [hosting][upload queue][FINAL] {"max":6458,"min":3489,"avg":4973.5,"active":0,"complete":2,"success":2,"errored":0,"retried":0,"total":2,"elapsed":6458}
+[info] ✔  hosting[thamar-landing-page]: file upload complete 
+[debug] [2026-01-12T11:14:47.574Z] [hosting] deploy completed after 6950ms
+[debug] [2026-01-12T11:14:47.574Z] [
+  {
+    "config": {
+      "public": "public",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "site": "thamar-landing-page"
+    },
+    "version": "projects/918570649704/sites/thamar-landing-page/versions/924564d7758182c5"
+  }
+]
+[info] i  hosting[thamar-landing-page]: finalizing version... 
+[debug] [2026-01-12T11:14:47.575Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:47.575Z] Checked if tokens are valid: true, expires at: 1768219350708
+[debug] [2026-01-12T11:14:47.575Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 updateMask=status%2Cconfig
+[debug] [2026-01-12T11:14:47.575Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/thamar-landing-page/versions/924564d7758182c5 {"status":"FINALIZED","config":{}}
