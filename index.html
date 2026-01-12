@@ -256,6 +256,78 @@
 
     </div>
 
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlxXHoiOodcNIpqBnCMTy8v2n3iHVcq7s",
+            authDomain: "thamar-landing-page.firebaseapp.com",
+            projectId: "thamar-landing-page",
+            storageBucket: "thamar-landing-page.firebasestorage.app",
+            messagingSenderId: "918570649704",
+            appId: "1:918570649704:web:11daac24e7214bb0d553dd"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // Track Page View (Automatically handled, but good to confirm)
+        console.log('Firebase Analytics Initialized 🚀');
+
+        // Helper to track clicks
+        function trackEvent(eventName, params = {}) {
+            logEvent(analytics, eventName, params);
+            console.log(`Event Logged: ${eventName}`, params);
+        }
+
+        // --- Event Listeners ---
+
+        // 1. WhatsApp Top Order Button
+        const waTopBtn = document.querySelector('a[href*="wa.me"][class*="mt-4"]');
+        if (waTopBtn) {
+            waTopBtn.addEventListener('click', () => {
+                trackEvent('click_whatsapp_order_top', { type: 'conversion', location: 'header' });
+            });
+        }
+
+        // 2. WhatsApp Floating Button
+        const waFloatBtn = document.querySelector('a[href*="wa.me"][class*="fixed"]');
+        if (waFloatBtn) {
+            waFloatBtn.addEventListener('click', () => {
+                trackEvent('click_whatsapp_float', { type: 'conversion', location: 'floating' });
+            });
+        }
+
+        // 3. WhatsApp Link (List)
+        const waListLink = document.querySelector('a[href*="wa.me"]:not([class*="fixed"]):not([class*="mt-4"])');
+        if (waListLink) {
+            waListLink.addEventListener('click', () => {
+                trackEvent('click_whatsapp_list', { type: 'conversion', location: 'list' });
+            });
+        }
+
+        // 4. Instagram Link
+        const igLink = document.querySelector('a[href*="instagram.com"]');
+        if (igLink) {
+            igLink.addEventListener('click', () => {
+                trackEvent('click_instagram', { type: 'engagement' });
+            });
+        }
+
+        // 5. TikTok Link
+        const tiktokLink = document.querySelector('a[href*="tiktok.com"]');
+        if (tiktokLink) {
+            tiktokLink.addEventListener('click', () => {
+                trackEvent('click_tiktok', { type: 'engagement' });
+            });
+        }
+
+    </script>
+
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
