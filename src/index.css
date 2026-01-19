@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-gold-main: #B8860B;
+  --color-gold-dark: #8B6914;
+  --color-gold-light: #D4A843;
+  --color-gold-pale: #E8D5A3;
+
+  --color-cream: #FDF8E8;
+  --color-cream-dark: #F5EDD6;
+
+  --color-brown-dark: #4A3728;
+  --color-brown-text: #5C4033;
+
+  /* Fonts */
+  --font-body: "Noto Naskh Arabic", serif;
+  --font-reem: "Reem Kufi", sans-serif;
+  --font-amiri: "Amiri", serif;
+
+  /* Animations */
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s infinite;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDF8E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4A843;
+  border-radius: 4px;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Touch feedback */
+a,
+button {
+  -webkit-tap-highlight-color: rgba(184, 134, 11, 0.2);
+  touch-action: manipulation;
+}
+
+a:active,
+button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
