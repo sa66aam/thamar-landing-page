@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة المنتجات | ثمر النخيل</title>
+    <meta name="description" content="قائمة منتجات ثمر النخيل - تمور فاخرة من قلب الشرقية">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { main: '#B8860B', dark: '#8B6914', light: '#D4A843', pale: '#E8D5A3' },
+                        cream: { DEFAULT: '#FDF8E8', dark: '#F5EDD6' },
+                        brown: { dark: '#4A3728', text: '#5C4033' }
+                    },
+                    fontFamily: {
+                        heading: ['Amiri', 'serif'],
+                        body: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        .pattern-bg {
+            background-image: radial-gradient(#B8860B 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            opacity: 0.08;
+        }
+        .menu-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(184, 134, 11, 0.25);
+        }
+        .product-image {
+            transition: transform 0.6s ease;
+        }
+        .menu-card:hover .product-image {
+            transform: scale(1.08);
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .badge-premium {
+            background: linear-gradient(90deg, #B8860B, #D4A843, #B8860B);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        .badge-najd {
+            background: linear-gradient(90deg, #4A3728, #6B4423, #4A3728);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+    </style>
+</head>
+
+<body class="font-body bg-cream text-brown-text min-h-screen">
+    <!-- Pattern Background -->
+    <div class="fixed inset-0 pattern-bg pointer-events-none z-0"></div>
+
+    <div class="relative z-10 max-w-lg mx-auto min-h-screen bg-white/40 shadow-2xl">
+
+        <!-- Header -->
+        <header class="relative pt-8 pb-6 px-6 text-center border-b border-gold-pale/50">
+            <!-- Back Button -->
+            <a href="index.html" class="absolute top-6 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:shadow-lg transition-all">
+                <i data-lucide="arrow-right" class="w-5 h-5 text-brown-dark"></i>
+            </a>
+
+            <!-- Logo -->
+            <div class="w-20 h-20 mx-auto mb-4 rounded-full border-3 border-gold-main shadow-lg overflow-hidden bg-cream">
+                <img src="logo.jpg" alt="ثمر النخيل" class="w-full h-full object-cover" style="mix-blend-mode: multiply;">
+            </div>
+
+            <h1 class="font-heading text-3xl text-brown-dark font-bold">قائمة المنتجات</h1>
+            <p class="text-gold-dark text-sm mt-1">كل قطعة محضّرة بحب من بيتنا 🧡</p>
+
+            <!-- Decorative Line -->
+            <div class="flex items-center justify-center gap-3 mt-4">
+                <div class="h-px w-16 bg-gradient-to-l from-gold-main to-transparent"></div>
+                <i data-lucide="sparkles" class="w-4 h-4 text-gold-main"></i>
+                <div class="h-px w-16 bg-gradient-to-r from-gold-main to-transparent"></div>
+            </div>
+        </header>
+
+        <!-- Products Section -->
+        <main class="px-4 py-8 space-y-6">
+
+            <!-- Product 1: ذوق المدينة -->
+            <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-lg border border-gold-pale/30">
+                <!-- Image Container -->
+                <div class="relative h-52 overflow-hidden bg-cream-dark">
+                    <img src="products/thawq-madinah.jpg" alt="ذوق المدينة"
+                         class="product-image w-full h-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=600&q=80'">
+                    <!-- Premium Badge -->
+                    <div class="absolute top-4 right-4 badge-premium text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                        ⭐ الأكثر طلباً
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-5">
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-brown-dark leading-tight">ذوق المدينة</h3>
+                            <p class="text-gold-dark text-sm font-medium mt-1">Thawq Al-Madinah</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="font-bold text-lg text-brown-dark">---</span>
+                            <span class="text-xs text-gray-400">السعر قريباً</span>
+                        </div>
+                    </div>
+
+                    <p class="text-brown-text/80 text-sm leading-relaxed mb-4">
+                        عجوة المدينة المنورة بحشوة من المكسرات بخلطتنا الخاصة، مع صوص الدبس العضوي اللي يذوب بفمك! 🌴✨
+                    </p>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i data-lucide="heart" class="w-4 h-4 text-red-400"></i>
+                            <span>من قلب طيبة الطيبة</span>
+                        </div>
+                        <a href="https://wa.me/966596440340?text=السلام عليكم، أبغى أطلب ذوق المدينة 🌴"
+                           target="_blank"
+                           class="flex items-center gap-2 bg-[#25D366] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#20BD5A] transition-colors shadow-md">
+                            <span>اطلب الحين</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Product 2: ذوق السكري -->
+            <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-lg border border-gold-pale/30">
+                <div class="relative h-52 overflow-hidden bg-cream-dark">
+                    <img src="products/thawq-sukari.jpg" alt="ذوق السكري"
+                         class="product-image w-full h-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&q=80'">
+                    <div class="absolute top-4 right-4 bg-gold-main text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                        🍯 حلاوة طبيعية
+                    </div>
+                </div>
+
+                <div class="p-5">
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-brown-dark leading-tight">ذوق السكري</h3>
+                            <p class="text-gold-dark text-sm font-medium mt-1">Thawq Al-Sukari</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="font-bold text-lg text-brown-dark">---</span>
+                            <span class="text-xs text-gray-400">السعر قريباً</span>
+                        </div>
+                    </div>
+
+                    <p class="text-brown-text/80 text-sm leading-relaxed mb-4">
+                        سكري مفتّل بحشوة البسكويت الخاصة فينا، ومزيّن بصوص الطحينة الفاخرة. كل قضمة تجربة ما تتكرر! 🤤
+                    </p>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i data-lucide="star" class="w-4 h-4 text-gold-main"></i>
+                            <span>سكري القصيم الأصلي</span>
+                        </div>
+                        <a href="https://wa.me/966596440340?text=السلام عليكم، أبغى أطلب ذوق السكري 🍯"
+                           target="_blank"
+                           class="flex items-center gap-2 bg-[#25D366] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#20BD5A] transition-colors shadow-md">
+                            <span>اطلب الحين</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Product 3: ذوق نجد -->
+            <article class="menu-card bg-white rounded-3xl overflow-hidden shadow-lg border border-gold-pale/30">
+                <div class="relative h-52 overflow-hidden bg-cream-dark">
+                    <img src="products/thawq-najd.jpg" alt="ذوق نجد"
+                         class="product-image w-full h-full object-cover"
+                         onerror="this.src='https://images.unsplash.com/photo-1593001872095-7d5b3868fb1d?w=600&q=80'">
+                    <div class="absolute top-4 right-4 badge-najd text-cream text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                        🏜️ طعم الأصالة
+                    </div>
+                </div>
+
+                <div class="p-5">
+                    <div class="flex items-start justify-between gap-3 mb-3">
+                        <div>
+                            <h3 class="font-heading text-2xl font-bold text-brown-dark leading-tight">ذوق نجد</h3>
+                            <p class="text-gold-dark text-sm font-medium mt-1">Thawq Najd</p>
+                        </div>
+                        <div class="flex flex-col items-end">
+                            <span class="font-bold text-lg text-brown-dark">---</span>
+                            <span class="text-xs text-gray-400">السعر قريباً</span>
+                        </div>
+                    </div>
+
+                    <p class="text-brown-text/80 text-sm leading-relaxed mb-4">
+                        هنا طعم الأصالة! تمر إخلاص مع الأقط والسمن البلدي، ياخذك لأصالتنا العريقة. ضيافة أجدادنا بلمسة عصرية! 🐪👑
+                    </p>
+
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-500">
+                            <i data-lucide="crown" class="w-4 h-4 text-gold-dark"></i>
+                            <span>وصفة الأجداد</span>
+                        </div>
+                        <a href="https://wa.me/966596440340?text=السلام عليكم، أبغى أطلب ذوق نجد 🏜️"
+                           target="_blank"
+                           class="flex items-center gap-2 bg-[#25D366] text-white text-sm font-bold px-4 py-2 rounded-full hover:bg-[#20BD5A] transition-colors shadow-md">
+                            <span>اطلب الحين</span>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Special Offer Banner -->
+            <div class="bg-gradient-to-r from-brown-dark to-brown-text rounded-2xl p-5 text-cream text-center shadow-xl">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <i data-lucide="gift" class="w-5 h-5 text-gold-light"></i>
+                    <span class="font-bold text-lg">تبغى الثلاثة؟</span>
+                </div>
+                <p class="text-sm opacity-90 mb-3">اطلب المجموعة الكاملة واستمتع بكل الأذواق!</p>
+                <a href="https://wa.me/966596440340?text=السلام عليكم، أبغى أطلب المجموعة الكاملة (ذوق المدينة + ذوق السكري + ذوق نجد) 🎁"
+                   target="_blank"
+                   class="inline-flex items-center gap-2 bg-gold-main text-white font-bold px-6 py-2.5 rounded-full hover:bg-gold-dark transition-colors">
+                    <span>اطلب المجموعة</span>
+                    <span class="text-lg">🎁</span>
+                </a>
+            </div>
+
+            <!-- Info Note -->
+            <div class="bg-cream-dark/50 rounded-xl p-4 text-center border border-gold-pale/30">
+                <p class="text-sm text-brown-text/70">
+                    <i data-lucide="info" class="w-4 h-4 inline-block ml-1 text-gold-main"></i>
+                    التوصيل متاح داخل المنطقة الشرقية
+                </p>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-cream-dark border-t border-gold-pale py-6 px-6">
+            <div class="text-center mb-4">
+                <p class="font-heading text-xl text-brown-dark mb-1">ثمر النخيل 🌴</p>
+                <p class="text-sm text-brown-text/70">من بيتنا لبيتك، بكل حب</p>
+            </div>
+
+            <div class="flex items-center justify-center gap-4 mb-4">
+                <a href="https://wa.me/966596440340" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-md hover:shadow-lg transition-all">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </a>
+                <a href="https://instagram.com/thamar.alnakheel" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white shadow-md hover:shadow-lg transition-all">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="https://tiktok.com/@thamar.alnakheel" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white shadow-md hover:shadow-lg transition-all">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+            </div>
+
+            <p class="text-center text-xs text-brown-text/50">© 2025 ثمر النخيل - جميع الحقوق محفوظة</p>
+        </footer>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
