@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MapPin, BookOpen, ArrowLeft, Instagram, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { logEvent } from '../lib/firebase';
+import { logEvent, initScrollTracking, startTimeTracking, endTimeTracking } from '../lib/firebase';
 
 // Custom WhatsApp & TikTok SVGs
 const WhatsAppIcon = ({ className }) => (
@@ -17,6 +17,18 @@ const TikTokIcon = ({ className }) => (
 );
 
 const LandingPage = () => {
+    useEffect(() => {
+        // Start tracking
+        startTimeTracking();
+        const cleanupScroll = initScrollTracking('landing');
+
+        // Cleanup on unmount
+        return () => {
+            endTimeTracking('landing');
+            cleanupScroll();
+        };
+    }, []);
+
     return (
         <div className="font-body bg-cream text-brown-text min-h-screen relative overflow-x-hidden selection:bg-gold-pale selection:text-brown-dark">
 

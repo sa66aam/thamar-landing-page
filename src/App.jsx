@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import MenuPage from './pages/MenuPage';
-import { logEvent } from './lib/firebase';
+import { logEvent, trackSessionStart } from './lib/firebase';
 
 // Component to track page views automatically
 const PageTracker = () => {
   const location = useLocation();
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
+    // Track session start only on first load
+    if (isFirstLoad.current) {
+      trackSessionStart();
+      isFirstLoad.current = false;
+    }
+
+    // Track page view
     logEvent('page_view', {
       page_path: location.pathname,
       page_title: document.title

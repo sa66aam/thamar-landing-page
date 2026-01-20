@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Send, Heart, Star, Crown, Package, Info, Instagram, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { logEvent } from '../lib/firebase';
+import { logEvent, initScrollTracking, startTimeTracking, endTimeTracking, trackProductView, resetProductViews } from '../lib/firebase';
 
 // Custom SVG Icons
 const WhatsAppIcon = ({ className }) => (
@@ -72,7 +72,104 @@ const products = [
     }
 ];
 
+// Product Card with view tracking
+const ProductCard = ({ product }) => {
+    const cardRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    trackProductView(product.name);
+                }
+            },
+            { threshold: 0.5 } // Trigger when 50% visible
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [product.name]);
+
+    return (
+        <article
+            ref={cardRef}
+            className={`relative rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-[0.98] active:rotate-[0.5deg] group isolate
+            ${product.isSpecial
+                    ? 'bg-gradient-to-br from-white/95 to-gold-pale/10 border-2 border-gold-main/40'
+                    : 'bg-white/90 backdrop-blur-xl border border-white/50'}`}
+        >
+            {/* Image */}
+            <div className="relative h-56 overflow-hidden">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className={`absolute top-4 right-4 ${product.badgeStyle} text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90`}>
+                    {product.badge}
+                </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                    <div>
+                        <h3 className="font-amiri text-2xl font-bold text-brown-dark leading-tight">{product.name}</h3>
+                        <p className="text-gold-dark text-sm font-bold mt-1 tracking-wide">{product.nameEn}</p>
+                    </div>
+                    <div className="flex flex-col items-end">
+                        <span className="font-bold text-lg text-brown-dark opacity-40">---</span>
+                    </div>
+                </div>
+
+                <p className="text-brown-text/90 text-sm leading-7 mb-6 font-medium">{product.description}</p>
+
+                <div className="flex items-center justify-between pt-2 border-t border-gold-pale/20">
+                    <div className="flex items-center gap-2 text-xs text-gray-600 bg-gold-pale/10 px-3 py-1.5 rounded-full">
+                        <product.tagIcon size={14} className={product.tagColor} />
+                        <span>{product.tagText}</span>
+                    </div>
+                    <div className="relative group/btn p-[2px] rounded-full overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-moving-border bg-[length:200%_100%] opacity-70" />
+                        <a
+                            href={`https://wa.me/966596440340?text=${encodeURIComponent(product.whatsappMessage)}`}
+                            onClick={() => logEvent('click_order', { product: product.name, location: 'menu_page' })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`relative flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-gold-main/20 transition-all duration-200 active:scale-95
+                            ${product.isSpecial
+                                    ? 'bg-gradient-to-r from-gold-main to-gold-dark hover:from-gold-dark hover:to-gold-main'
+                                    : 'bg-[#25D366] hover:bg-[#20BD5A]'}`}
+                        >
+                            <span>اطلب</span>
+                            <Send size={18} className={!product.isSpecial ? 'animate-pulse' : ''} />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    );
+};
+
 const MenuPage = () => {
+    useEffect(() => {
+        // Start tracking
+        startTimeTracking();
+        resetProductViews();
+        const cleanupScroll = initScrollTracking('menu');
+
+        // Cleanup on unmount
+        return () => {
+            endTimeTracking('menu');
+            cleanupScroll();
+        };
+    }, []);
+
     return (
         <div className="font-body bg-cream text-brown-text min-h-screen">
             {/* Pattern Background */}
@@ -122,68 +219,7 @@ const MenuPage = () => {
                 {/* Products */}
                 <main className="px-5 py-8 space-y-8">
                     {products.map((product) => (
-                        <article
-                            key={product.id}
-                            className={`relative rounded-3xl overflow-hidden shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-[0.98] active:rotate-[0.5deg] group isolate
-                            ${product.isSpecial
-                                    ? 'bg-gradient-to-br from-white/95 to-gold-pale/10 border-2 border-gold-main/40'
-                                    : 'bg-white/90 backdrop-blur-xl border border-white/50'}`}
-                        >
-                            {/* Image */}
-                            <div className="relative h-56 overflow-hidden">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    loading="lazy"
-                                />
-                                {/* Overlay Gradient for text readability if needed */}
-                                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                                {/* Badge */}
-                                <div className={`absolute top-4 right-4 ${product.badgeStyle} text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md bg-opacity-90`}>
-                                    {product.badge}
-                                </div>
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-6">
-                                <div className="flex items-start justify-between gap-3 mb-3">
-                                    <div>
-                                        <h3 className="font-amiri text-2xl font-bold text-brown-dark leading-tight">{product.name}</h3>
-                                        <p className="text-gold-dark text-sm font-bold mt-1 tracking-wide">{product.nameEn}</p>
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className="font-bold text-lg text-brown-dark opacity-40">---</span>
-                                    </div>
-                                </div>
-
-                                <p className="text-brown-text/90 text-sm leading-7 mb-6 font-medium">{product.description}</p>
-
-                                <div className="flex items-center justify-between pt-2 border-t border-gold-pale/20">
-                                    <div className="flex items-center gap-2 text-xs text-gray-600 bg-gold-pale/10 px-3 py-1.5 rounded-full">
-                                        <product.tagIcon size={14} className={product.tagColor} />
-                                        <span>{product.tagText}</span>
-                                    </div>
-                                    <div className="relative group/btn p-[2px] rounded-full overflow-hidden">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent animate-moving-border bg-[length:200%_100%] opacity-70" />
-                                        <a
-                                            href={`https://wa.me/966596440340?text=${encodeURIComponent(product.whatsappMessage)}`}
-                                            onClick={() => logEvent('click_order', { product: product.name, location: 'menu_page' })}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={`relative flex items-center gap-2 text-white text-sm font-bold px-5 py-2.5 rounded-full shadow-lg shadow-gold-main/20 transition-all duration-200 active:scale-95 
-                                            ${product.isSpecial
-                                                    ? 'bg-gradient-to-r from-gold-main to-gold-dark hover:from-gold-dark hover:to-gold-main'
-                                                    : 'bg-[#25D366] hover:bg-[#20BD5A]'}`}
-                                        >
-                                            <span>اطلب</span>
-                                            <Send size={18} className={!product.isSpecial ? 'animate-pulse' : ''} />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        <ProductCard key={product.id} product={product} />
                     ))}
 
                     {/* Info Note */}
@@ -205,6 +241,7 @@ const MenuPage = () => {
                     <div className="flex items-center justify-center gap-4 mb-4">
                         <a
                             href="https://wa.me/966596440340"
+                            onClick={() => logEvent('click_whatsapp_footer', { location: 'menu_footer' })}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-10 h-10 flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-md hover:shadow-lg transition-all"
@@ -213,6 +250,7 @@ const MenuPage = () => {
                         </a>
                         <a
                             href="https://instagram.com/thamar.alnakheel"
+                            onClick={() => logEvent('click_instagram_footer', { location: 'menu_footer' })}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 text-white shadow-md hover:shadow-lg transition-all"
@@ -221,6 +259,7 @@ const MenuPage = () => {
                         </a>
                         <a
                             href="https://tiktok.com/@thamar.alnakheel"
+                            onClick={() => logEvent('click_tiktok_footer', { location: 'menu_footer' })}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white shadow-md hover:shadow-lg transition-all"
