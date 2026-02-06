@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap');
+/* Fonts loaded via <link> in index.html for faster loading */
 @import "tailwindcss";
 
 @theme {
@@ -23,6 +23,41 @@
   --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
   --animate-float: float 3s ease-in-out infinite;
   --animate-shimmer: shimmer 3s infinite;
+  --animate-fade-in: fade-in 0.2s ease-out forwards;
+  --animate-scale-up: scale-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-bounce-once: bounce-once 0.6s ease-out forwards;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scale-up {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounce-once {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
   @keyframes fade-in-up {
     0% {
@@ -78,6 +113,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar for horizontal scroll sections */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Touch feedback */
 a,
 button {
@@ -89,4 +134,30 @@ a:active,
 button:active {
   transform: scale(0.97);
   opacity: 0.9;
+}
+
+/* Performance optimizations for smooth navigation */
+.bg-cream {
+  will-change: auto;
+}
+
+/* Optimize animations for GPU */
+[class*="animate-"],
+[class*="transition-"] {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Fast loading spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 0.6s linear infinite;
+}
+
+/* Preload hint for navigation */
+a[href^="/"] {
+  content-visibility: auto;
 }

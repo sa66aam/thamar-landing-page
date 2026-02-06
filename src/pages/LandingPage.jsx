@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { MapPin, BookOpen, ArrowLeft, Instagram, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { MapPin, BookOpen, ArrowLeft, ArrowRight, Instagram, Check, MessageCircle, Star, ChevronLeft, ChevronRight, PartyPopper, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { logEvent, initScrollTracking, startTimeTracking, endTimeTracking } from '../lib/firebase';
+import EventsShowcase from '../components/EventsShowcase';
 
 // Custom WhatsApp & TikTok SVGs
 const WhatsAppIcon = ({ className }) => (
@@ -15,6 +16,110 @@ const TikTokIcon = ({ className }) => (
         <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
     </svg>
 );
+
+// Reviews Carousel Component with auto-scroll and navigation
+const ReviewsCarousel = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const totalReviews = 4;
+    const autoScrollInterval = 3000; // 3 seconds
+
+    // Auto-scroll effect
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % totalReviews);
+        }, autoScrollInterval);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const goToSlide = (index) => {
+        setCurrentIndex(index);
+    };
+
+    const scrollPrev = () => {
+        setCurrentIndex((prev) => (prev - 1 + totalReviews) % totalReviews);
+    };
+
+    const scrollNext = () => {
+        setCurrentIndex((prev) => (prev + 1) % totalReviews);
+    };
+
+    return (
+        <section className="pt-8 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+            {/* Section Header */}
+            <div className="text-center mb-6">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <MessageCircle size={20} className="text-gold-main" />
+                    <h2 className="font-amiri text-2xl font-bold text-brown-dark">آراؤكم تدفعنا نجمّلكم</h2>
+                </div>
+                <div className="flex items-center justify-center gap-3 mt-2 opacity-60">
+                    <div className="h-px w-12 bg-gradient-to-l from-gold-main to-transparent" />
+                    <Star size={12} className="text-gold-main fill-gold-main" />
+                    <div className="h-px w-12 bg-gradient-to-r from-gold-main to-transparent" />
+                </div>
+            </div>
+
+            {/* Carousel Container */}
+            <div className="relative px-12">
+                {/* Arrow Navigation - Left */}
+                <button
+                    onClick={scrollPrev}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 shadow-lg border border-gold-pale/50 text-gold-dark hover:bg-gold-main hover:text-white active:scale-95 transition-all"
+                    aria-label="السابق"
+                >
+                    <ChevronLeft size={24} />
+                </button>
+
+                {/* Arrow Navigation - Right */}
+                <button
+                    onClick={scrollNext}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 shadow-lg border border-gold-pale/50 text-gold-dark hover:bg-gold-main hover:text-white active:scale-95 transition-all"
+                    aria-label="التالي"
+                >
+                    <ChevronRight size={24} />
+                </button>
+
+                {/* Single Image Display - Fixed height container with logo watermark */}
+                <div className="rounded-2xl shadow-lg overflow-hidden border border-gold-pale/30 h-[180px] flex items-center justify-center relative bg-cream">
+                    {/* Logo Watermark Background - Zoomed to show palm and houses */}
+                    <div
+                        className="absolute inset-0 z-0 opacity-[0.20] pointer-events-none"
+                        style={{
+                            backgroundImage: "url('/logo.jpg')",
+                            backgroundSize: '180%',
+                            backgroundPosition: 'center 45%',
+                            mixBlendMode: 'multiply'
+                        }}
+                    />
+
+                    {/* Review Image */}
+                    <img
+                        key={currentIndex}
+                        src={`/reviews/review-${currentIndex + 1}.jpg`}
+                        alt={`تقييم عميل ${currentIndex + 1}`}
+                        className="max-w-[95%] max-h-[90%] object-contain rounded-xl shadow-md relative z-10 transition-opacity duration-300"
+                    />
+                </div>
+
+                {/* Dot Indicators */}
+                <div className="flex justify-center gap-2 mt-4">
+                    {[0, 1, 2, 3].map((index) => (
+                        <button
+                            key={index}
+                            onClick={() => goToSlide(index)}
+                            className={`h-2.5 rounded-full transition-all duration-300 ${
+                                currentIndex === index
+                                    ? 'bg-gold-main w-6'
+                                    : 'bg-gold-pale hover:bg-gold-light w-2.5'
+                            }`}
+                            aria-label={`انتقل للتقييم ${index + 1}`}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
 
 const LandingPage = () => {
     useEffect(() => {
@@ -92,6 +197,29 @@ const LandingPage = () => {
                                 <BookOpen size={24} />
                             </div>
                         </Link>
+
+                        {/* Secondary CTA: Events/Catering - Highlighted as Trending */}
+                        <Link
+                            to="/gallery"
+                            onClick={() => logEvent('click_events_cta', { location: 'header' })}
+                            className="flex items-center justify-center gap-4 p-4 mt-3 bg-gradient-to-r from-purple-600 via-pink-500 to-rose-500 backdrop-blur-md rounded-2xl shadow-lg shadow-pink-500/30 border border-white/30 hover:shadow-xl hover:shadow-pink-500/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-500 ease-spring group relative overflow-hidden"
+                        >
+                            {/* Animated sparkle effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 group-hover:via-white/30 transition-all duration-500" />
+                            <div className="absolute top-2 left-4 text-yellow-300 animate-pulse">
+                                <Sparkles size={16} />
+                            </div>
+                            <div className="absolute bottom-2 right-4 text-yellow-300 animate-pulse" style={{ animationDelay: '0.5s' }}>
+                                <Sparkles size={14} />
+                            </div>
+                            <div className="flex flex-col items-center text-center relative z-10">
+                                <span className="font-bold text-xl text-white group-hover:text-cream transition-colors">ضيافة مناسباتكم 🎉</span>
+                                <span className="text-sm text-white/90 font-medium mt-1">حفلات • فعاليات • مناسبات خاصة</span>
+                            </div>
+                            <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-lg shadow-pink-600/30 group-hover:scale-110 transition-transform duration-300 ease-spring border border-white/30 relative z-10">
+                                <PartyPopper size={24} />
+                            </div>
+                        </Link>
                     </div>
                 </header>
 
@@ -162,6 +290,12 @@ const LandingPage = () => {
                             <ArrowLeft size={20} className="text-gold-main/50 group-hover:text-black group-hover:-translate-x-1 transition-all relative z-10" />
                         </a>
                     </div>
+
+                    {/* Events Showcase Section - First */}
+                    <EventsShowcase />
+
+                    {/* Customer Reviews Section - After Events */}
+                    <ReviewsCarousel />
                 </main>
 
                 {/* Footer */}

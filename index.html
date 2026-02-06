@@ -7,6 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ثمر النخيل | Thamar Alnakheel</title>
 
+  <!-- Preconnect to Google Fonts for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Load fonts via link tags (much faster than CSS @import) -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Hide page until fonts are loaded to prevent flash of wrong font -->
+  <style>
+    html { visibility: hidden; }
+    html.fonts-loaded { visibility: visible; }
+  </style>
+  <script>
+    // Show page as soon as fonts are ready, or after 1.2s max wait
+    var t = setTimeout(function() { document.documentElement.classList.add('fonts-loaded'); }, 1200);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() {
+        clearTimeout(t);
+        document.documentElement.classList.add('fonts-loaded');
+      });
+    } else {
+      clearTimeout(t);
+      document.documentElement.classList.add('fonts-loaded');
+    }
+  </script>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RJ8HHGJJT"></script>
   <script>
